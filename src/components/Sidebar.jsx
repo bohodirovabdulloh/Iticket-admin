@@ -48,18 +48,7 @@ const Sidebar = ({ theme }) => {
             </Link>
           </li>
 
-          <li>
-            <Link
-              to="/app/advertising"
-              className={`flex items-center gap-4 py-3 px-6 rounded-lg transition-all duration-300 ${
-                location.pathname === "/app/advertising"
-                  ? "bg-blue-700 text-white shadow-md"
-                  : "hover:bg-blue-600 hover:text-white"
-              }`}
-            >
-              <FaBullhorn size={24} className="transition-transform duration-300 group-hover:scale-110" /> Баннер и Реклама
-            </Link>
-          </li>
+          
 
           {/* Add more items here as needed */}
         </ul>
