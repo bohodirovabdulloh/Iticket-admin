@@ -177,12 +177,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="mt-10 p-6 bg-white text-black rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 transform hover:scale-105">
-            <h2 className="text-2xl font-bold mb-4">Monthly Performance</h2>
-            <div className="w-full">
-              <Line data={lineData} options={lineOptions} />
-            </div>
-          </div>
+          
         </>
       )}
     </div>
