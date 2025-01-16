@@ -52,7 +52,7 @@ const Sidebar = ({ theme }) => {
 
           <li>
           <Link
-              to="/app/home"
+              to="/app/advertising"
               className={`flex items-center gap-4 py-3 px-6 rounded-lg transition-all duration-300 ${
                 location.pathname === "/app/home"
                   ? "bg-blue-700 text-white shadow-md"
