@@ -2,12 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaBullhorn,
-  FaClipboardList,
-  FaNewspaper,
   FaHome,
-  FaBoxOpen,
-  FaLayerGroup,
-  FaTags,
+ FaUserFriends 
 } from "react-icons/fa";
 
 const Sidebar = ({ theme }) => {
@@ -60,8 +56,18 @@ const Sidebar = ({ theme }) => {
               <FaBullhorn size={24} className="transition-transform duration-300 group-hover:scale-110" /> Баннер и Реклама
             </Link>
           </li>
-
-          {/* Add more items here as needed */}
+          <li>
+            <Link
+              to="/app/all-users"
+              className={`flex items-center gap-4 py-3 px-6 rounded-lg transition-all duration-300 ${
+                location.pathname === "/app/all-users"
+                  ? "bg-blue-700 text-white shadow-md"
+                  : "hover:bg-blue-600 hover:text-white"
+              }`}
+            >
+              <FaUserFriends size={24} className="transition-transform duration-300 group-hover:scale-110" /> Все пользователи
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

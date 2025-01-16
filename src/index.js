@@ -12,6 +12,7 @@ import Home from "../src/pages/Home";
 import Login from "../src/pages/Login"; 
 import store, { persistor } from "./redux/store";
 import Advertising from "./pages/Advertising";
+import AllUsers from "./pages/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,13 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Advertising />
+          </PrivateRoute>
+        ),
+      },{
+        path: "all-users", 
+        element: (
+          <PrivateRoute>
+            <AllUsers />
           </PrivateRoute>
         ),
       },
