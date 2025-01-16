@@ -30,6 +30,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "advertising", 
+        element: (
+          <PrivateRoute>
+            <Advertising />
+          </PrivateRoute>
+        ),
+      },
      
     ],
   },

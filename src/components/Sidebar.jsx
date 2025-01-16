@@ -9,6 +9,7 @@ import {
   FaLayerGroup,
   FaTags,
 } from "react-icons/fa";
+import { FcAdvertising } from "react-icons/fc";
 
 const Sidebar = ({ theme }) => {
   const location = useLocation();
@@ -46,6 +47,22 @@ const Sidebar = ({ theme }) => {
             >
               <FaHome size={24} className="transition-transform duration-300 group-hover:scale-110" /> Главная страница
             </Link>
+         
+          </li>
+
+          <li>
+          <Link
+              to="/app/home"
+              className={`flex items-center gap-4 py-3 px-6 rounded-lg transition-all duration-300 ${
+                location.pathname === "/app/home"
+                  ? "bg-blue-700 text-white shadow-md"
+                  : "hover:bg-blue-600 hover:text-white"
+              }`}
+            >
+              <FcAdvertising  size={24} className="transition-transform duration-300 group-hover:scale-110" /> Добавить рекламу
+            </Link>
+
+
           </li>
 
           
