@@ -1,65 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const Create = () => {
+const CreateUser = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const openModal = () => {
     setModalIsOpen(true);
-    setError(''); // Clear previous errors
-    setSuccess(''); // Clear previous success messages
+    setError("");
+    setSuccess("");
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setUsername('');
-    setPassword('');
-    setRole('');
-    setError('');
-    setSuccess('');
+    setUsername("");
+    setPassword("");
+    setRole("");
+    setError("");
+    setSuccess("");
   };
 
   const handleCreate = async () => {
     if (!username || !password || !role) {
-        setError('Please fill in all fields');
-        return;
+      setError("Please fill in all fields");
+      return;
     }
 
     const partnerData = { username, password, role };
 
     try {
-        const response = await fetch('https://bakend-wtc.onrender.com/api/v1/auth/create-partnyor', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(partnerData),
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || 'Error creating partner');
+      const response = await fetch(
+        "https://bakend-wtc.onrender.com/api/v1/auth/create-partnyor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(partnerData),
         }
+      );
 
-        setSuccess('Partner created successfully!');
-        closeModal(); // Only close modal on success
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Error creating partner");
+      }
+
+      setSuccess("Partner created successfully!");
+      closeModal();
     } catch (error) {
-        if (error.message.includes('E11000')) {
-            setError('Username already exists'); // Display user-friendly message
-        } else {
-            setError(error.message);
-        }
+      if (error.message.includes("E11000")) {
+        setError("Username already exists");
+      } else {
+        setError(error.message);
+      }
     }
-};
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full text-white">
-      <button onClick={openModal} className="btn btn-primary text-white">
+    <div className="flex flex-col items-center justify-center w-full text-base-100">
+      <button onClick={openModal} className="btn btn-primary text-base-100">
         Создать партнера
       </button>
 
@@ -76,7 +79,7 @@ const Create = () => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
-                  if (error) setError(''); // Clear error message on username change
+                  if (error) setError("");
                 }}
                 className="input input-bordered w-full"
                 required
@@ -123,4 +126,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateUser;

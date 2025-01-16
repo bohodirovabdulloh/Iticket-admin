@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../redux/authSclice";
+import { logout } from "../../redux/slices/authSclice";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    closeModal(); // Закрываем модал после выхода
+    closeModal();
   };
 
   const openModal = () => {
@@ -20,10 +20,10 @@ const Logout = () => {
   };
 
   return (
-    <div className="text-white w-[100]">
+    <div className="text-base">
       <button
         onClick={openModal}
-        className="bg-red-500 w-[120px] h-[48px] text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-200 ease-in-out"
+        className="btn btn-error w-[120px] h-[48px] text-white font-bold py-2 px-4 transition duration-200 ease-in-out"
       >
         Выйти
       </button>
@@ -31,11 +31,13 @@ const Logout = () => {
       {isDialogOpen && (
         <dialog open className="modal">
           <div className="modal-box">
-            <h2 className="text-lg font-bold mb-4">Вы уверены, что хотите выйти?</h2>
+            <h2 className="text-lg font-bold mb-4">
+              Вы уверены, что хотите выйти?
+            </h2>
             <div className="flex justify-end space-x-4">
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-200 ease-in-out"
+                className="bg-error text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out"
               >
                 Да
               </button>

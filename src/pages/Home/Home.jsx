@@ -2,10 +2,29 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBullhorn } from "react-icons/fa";
 import { Doughnut, Bar, Line } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from 'chart.js';
-import Loading from "../components/Loading";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+} from "chart.js";
+import Loading from "../../components/Loading/Loading";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement
+);
 
 const Dashboard = () => {
   const [advertising, setAdvertising] = useState([]);
@@ -19,7 +38,9 @@ const Dashboard = () => {
 
   const requestAdvertising = async () => {
     try {
-      const response = await fetch("https://bakend-wtc.onrender.com/api/v1/banners");
+      const response = await fetch(
+        "https://bakend-wtc.onrender.com/api/v1/banners"
+      );
       const ads = await response.json();
       setAdvertising(ads.data || []);
       setLoading(false);
@@ -32,15 +53,15 @@ const Dashboard = () => {
   const totalItems = advertising.length;
 
   const doughnutData = {
-    labels: ['Advertising'],
+    labels: ["Advertising"],
     datasets: [
       {
-        label: 'Distribution',
+        label: "Distribution",
         data: [advertising.length],
-        backgroundColor: ['#FF6384'],
-        hoverBackgroundColor: ['#FF6384'],
+        backgroundColor: ["#FF6384"],
+        hoverBackgroundColor: ["#FF6384"],
         borderWidth: 1,
-        cutout: '75%',
+        cutout: "75%",
       },
     ],
   };
@@ -60,13 +81,13 @@ const Dashboard = () => {
   };
 
   const barData = {
-    labels: ['Advertising'],
+    labels: ["Advertising"],
     datasets: [
       {
-        label: 'Advertising Count',
+        label: "Advertising Count",
         data: [advertising.length],
-        backgroundColor: ['#4A90E2'],
-        hoverBackgroundColor: ['#357ABD'],
+        backgroundColor: ["#4A90E2"],
+        hoverBackgroundColor: ["#357ABD"],
         borderWidth: 1,
       },
     ],
@@ -97,14 +118,14 @@ const Dashboard = () => {
   };
 
   const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
       {
-        label: 'Monthly Performance',
+        label: "Monthly Performance",
         data: [12, 19, 3, 5, 2, 3],
         fill: false,
-        borderColor: '#4A90E2',
-        backgroundColor: '#4A90E2',
+        borderColor: "#4A90E2",
+        backgroundColor: "#4A90E2",
         tension: 0.4,
       },
     ],
@@ -114,7 +135,7 @@ const Dashboard = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
     },
     scales: {
@@ -142,9 +163,9 @@ const Dashboard = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div 
+            <div
               className="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 transform hover:scale-105 cursor-pointer"
-              onClick={() => handleNavigate('/app/advertising')}
+              onClick={() => handleNavigate("/advertising")}
             >
               <div className="flex justify-between items-center">
                 <FaBullhorn size={30} />
@@ -169,15 +190,17 @@ const Dashboard = () => {
             </div>
 
             <div className="p-6 bg-white text-black rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 transform hover:scale-105 flex flex-col items-center">
-              <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-transparent bg-clip-text">Advertising Count</h2>
-              <h1 className="text-4xl font-extrabold text-gray-800 mb-6">{advertising.length}</h1>
+              <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-transparent bg-clip-text">
+                Advertising Count
+              </h2>
+              <h1 className="text-4xl font-extrabold text-gray-800 mb-6">
+                {advertising.length}
+              </h1>
               <div className="w-full">
                 <Bar data={barData} options={barOptions} />
               </div>
             </div>
           </div>
-
-          
         </>
       )}
     </div>
