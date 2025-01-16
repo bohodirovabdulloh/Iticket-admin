@@ -12,6 +12,8 @@ import Home from "./pages/Home/Home";
 import Login from "../src/pages/Login/Login";
 import Advertising from "./pages/Advertising/Advertising";
 import Analyze from "./pages/Analyze/Analyze";
+import Advertising from "./pages/Advertising";
+import AllUsers from "./pages/Users/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/analyze",
         element: <PrivateRoute component={Analyze} />,
+      },
+      {
+        path: "/all-users",
+        element: <PrivateRoute component={AllUsers} />,
       },
     ],
   },
