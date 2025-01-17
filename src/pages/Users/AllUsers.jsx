@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import useApiRequest from "../hooks/useApiRequest"; // Adjust the path as needed
-import Table from "../components/Table/Table";
+import useApiRequest from "../../hooks/useApiRequest";
+import Table from "../../components/Table/Table";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);

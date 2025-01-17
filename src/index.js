@@ -12,7 +12,6 @@ import Home from "./pages/Home/Home";
 import Login from "../src/pages/Login/Login";
 import Advertising from "./pages/Advertising/Advertising";
 import Analyze from "./pages/Analyze/Analyze";
-import Advertising from "./pages/Advertising";
 import AllUsers from "./pages/Users/AllUsers";
 
 const router = createBrowserRouter([
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/dashboard",
+        path: "/",
         element: <PrivateRoute component={Home} />,
       },
       {

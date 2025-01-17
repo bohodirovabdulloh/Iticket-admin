@@ -8,6 +8,7 @@ import {
   FaBoxOpen,
   FaLayerGroup,
   FaTags,
+  FaUserFriends,
 } from "react-icons/fa";
 import { FaChartColumn } from "react-icons/fa6";
 
@@ -16,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`drawer lg:drawer-open overflow-y-hidden bg-base-100 shadow-lg w-full lg:w-2/12`}
+      className={`drawer lg:drawer-open overflow-y-hidden bg-base-100 shadow-lg w-64`}
     >
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
@@ -27,7 +28,7 @@ const Sidebar = () => {
           Open drawer
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side w-full">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
@@ -68,6 +69,18 @@ const Sidebar = () => {
                 className="transition-transform duration-300 group-hover:scale-110"
               />{" "}
               Анализы
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/all-users"
+              className={`flex items-center gap-4 py-3 px-6 rounded-lg   outline-none transition-all duration-300`}
+            >
+              <FaUserFriends
+                size={24}
+                className="transition-transform duration-300 group-hover:scale-110"
+              />{" "}
+              Список пользователей
             </Link>
           </li>
         </ul>
