@@ -2,56 +2,44 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import PrivateRoute from "../src/components/PrivateRoute"; // Import PrivateRoute component
 
-import Home from "../src/pages/Home";
-import Login from "../src/pages/Login"; 
 import store, { persistor } from "./redux/store";
-import Advertising from "./pages/Advertising";
-import AllUsers from "./pages/AllUsers";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Home from "./pages/Home/Home";
+import Login from "../src/pages/Login/Login";
+import Advertising from "./pages/Advertising/Advertising";
+import Analyze from "./pages/Analyze/Analyze";
+import AllUsers from "./pages/Users/AllUsers";
 
 const router = createBrowserRouter([
   {
-    path: "/app",
-    element: (
-      <PrivateRoute>
-        <App />
-      </PrivateRoute>
-    ),
+    path: "/",
+    element: <App />,
     children: [
       {
-        path: "home", 
-        element: (
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        ),
+        path: "/",
+        element: <PrivateRoute component={Home} />,
       },
       {
-        path: "advertising", 
-        element: (
-          <PrivateRoute>
-            <Advertising />
-          </PrivateRoute>
-        ),
-      },{
-        path: "all-users", 
-        element: (
-          <PrivateRoute>
-            <AllUsers />
-          </PrivateRoute>
-        ),
+        path: "/advertising",
+        element: <PrivateRoute component={Advertising} />,
       },
-     
+      {
+        path: "/analyze",
+        element: <PrivateRoute component={Analyze} />,
+      },
+      {
+        path: "/all-users",
+        element: <PrivateRoute component={AllUsers} />,
+      },
     ],
   },
   {
-    path: "/",
-    element: <Login />, // Login остаётся без PrivateRoute
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Table from "../components/Table/Table";
+import Table from "../../components/Table/Table";
 
 const AllUsers = () => {
   const apiUrl = process.env.REACT_APP_API_URL;

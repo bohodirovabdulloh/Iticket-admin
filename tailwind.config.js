@@ -11,6 +11,12 @@ module.exports = {
   ],
 
   daisyui: {
-    themes: ["night"]
-  }
+    themes: ["light", "night"],
+    base: true,
+    styled: true,
+    utils: true,
+    prefix: "",
+    logs: true,
+    themeRoot: ":root",
+  },
 }
