@@ -16,7 +16,7 @@ const useApiRequest = () => {
         url,
         method,
       });
-      setData(response.data);
+      setData(response);
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {

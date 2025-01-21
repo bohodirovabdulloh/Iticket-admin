@@ -11,9 +11,8 @@ const Advertising = () => {
         description: '',
     });
     const [isEditing, setIsEditing] = useState(false);
-    const [editingId, setEditingId] = useState(null); // Store the ID of the banner being edited
+    const [editingId, setEditingId] = useState(null); 
 
-    // Fetch all banners from the API
     const dataRequest = async () => {
         setLoading(true);
         try {

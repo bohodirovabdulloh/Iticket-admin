@@ -1,43 +1,38 @@
 import React, { useEffect, useState } from "react";
-import useApiRequest from "../hooks/useApiRequest"; // Adjust the path as needed
+import axios from "axios";
 import Table from "../components/Table/Table";
 
 const AllUsers = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [users, setUsers] = useState([]);
-  const {
-    loading: usersLoading,
-    error: usersError,
-    sendRequest: fetchUsers,
-    data: responseData,
-  } = useApiRequest();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchUsers("https://dummyjson.com/users", "GET");
-  }, [fetchUsers]);
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${apiUrl}/users`);
+        setUsers(response.data.data || []);
+      } catch (err) {
+        setError("Failed to fetch users.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUsers();
+  }, [apiUrl]);
 
-  useEffect(() => {
-    if (responseData) {
-      setUsers(responseData.users);
-    }
-  }, [responseData]);
+  const columns = [
+    { header: "ID", accessor: "_id" },
+    { header: "Name", accessor: (user) => `${user.firstName} ${user.lastName}` },
+    { header: "Email", accessor: "email" },
+    { header: "Phone", accessor: "phoneNumber" },
+  ];
 
   return (
     <div>
-      <Table
-        data={users}
-        loading={usersLoading}
-        error={usersError}
-        columns={[
-          { header: "ID", accessor: "id" },
-          { header: "Name", accessor: (user) => `${user.firstName} ${user.lastName}` },
-          { header: "Email", accessor: "email" },
-          { header: "Phone", accessor: "phone" },
-          { header: "Age", accessor: "age" },
-          { header: "Gender", accessor: "gender" },
-          { header: "Blood Group", accessor: "bloodGroup" },
-          { header: "Address", accessor: (user) => `${user.address.city}, ${user.address.state}` },
-        ]}
-      />
+      <Table data={users} loading={loading} error={error} columns={columns} />
     </div>
   );
 };
