@@ -9,6 +9,9 @@ const Advertising = () => {
     images: [],
     title: "",
     description: "",
+    opacity: "",
+    height: "",
+    backgroundImg: "" // corrected spelling
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -47,6 +50,9 @@ const Advertising = () => {
     if (
       !formData.title ||
       !formData.description ||
+      !formData.opacity ||
+      !formData.height ||
+      !formData.backgroundImg || // corrected field name
       (formData.images.length < 1 && !isEditing)
     ) {
       alert("Please fill out all required fields");
@@ -56,6 +62,9 @@ const Advertising = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("description", formData.description);
+    formDataToSend.append("opacity", formData.opacity);
+    formDataToSend.append("height", formData.height);
+    formDataToSend.append("background_image", formData.backgroundImg);
 
     formData.images.forEach((image) => {
       formDataToSend.append("images", image);
@@ -96,7 +105,7 @@ const Advertising = () => {
       setData(updatedData);
       document.getElementById("my_modal_advertising").close();
       alert("Banner successfully saved!");
-      setFormData({ images: [], title: "", description: "" });
+      setFormData({ images: [], title: "", description: "" , opacity: "", height: "", backgroundImg: "" }); // corrected field name
     } catch (error) {
       console.error("Error adding/updating advertisement:", error.message);
       alert(`Failed to save the banner: ${error.message}`);
@@ -126,6 +135,9 @@ const Advertising = () => {
       title: ad.title,
       description: ad.description,
       images: [],
+      opacity: ad.opacity,
+      height: ad.height,
+      backgroundImg: ad.background_image, // corrected field name
     });
     setEditingId(ad._id);
     setIsEditing(true);
@@ -142,7 +154,7 @@ const Advertising = () => {
           className="btn btn-primary flex items-center"
           onClick={() => {
             setIsEditing(false);
-            setFormData({ images: [], title: "", description: "" });
+            setFormData({ images: [], title: "", description: "" , opacity: "" , backgroundImg: "", height: "" });
             document.getElementById("my_modal_advertising").showModal();
           }}
         >
@@ -193,8 +205,44 @@ const Advertising = () => {
                 required
               />
             </label>
+            <label className="input input-bordered flex items-center gap-2 mt-5">
+              Прозрачность заднего фона 
+              <input
+                type="number"
+                name="opacity"
+                value={formData.opacity}
+                onChange={handleFormChange}
+                className="grow"
+                placeholder="Прозрачность заднего фона"
+                required
+              />
+            </label>
+            <label className="input input-bordered flex items-center gap-2 mt-5">
+              Высота рекламного баннера 
+              <input
+                type="text"
+                name="height"
+                value={formData.height}
+                onChange={handleFormChange}
+                className="grow"
+                placeholder="Высота рекламного баннера px"
+                required
+              />
+            </label>
+            <label className="input input-bordered flex items-center gap-2 mt-5">
+              Изображение заднего фона
+              <input
+                type="text"
+                name="backgroundImg" // corrected field name
+                value={formData.backgroundImg} // corrected field name
+                onChange={handleFormChange}
+                className="grow"
+                placeholder="Изображение заднего фона"
+                required
+              />
+            </label>
             <button type="submit" className="btn mt-5">
-              {isEditing ? "Edit Banner" : "Add Banner"}
+              {isEditing ? "Редактировать баннер" : "Добавить баннер"}
             </button>
           </form>
         </div>
@@ -214,7 +262,11 @@ const Advertising = () => {
             </thead>
             <tbody>
               {loading ? (
-                <tr></tr>
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    <Loading />
+                  </td>
+                </tr>
               ) : Array.isArray(data) && data.length > 0 ? (
                 data.map((ad) => (
                   <tr key={ad._id}>
@@ -261,11 +313,6 @@ const Advertising = () => {
               )}
             </tbody>
           </table>
-          {loading && (
-            <div className="flex justify-center mt-5">
-              <Loading />
-            </div>
-          )}
         </div>
       </div>
     </div>
